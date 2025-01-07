@@ -63,7 +63,7 @@ function KanjiInfo({ kanji }) {
                             unicode,
                             readings: [data.on_readings.join(', '), data.kun_readings.join(', ')],
                             meanings: data.meanings.join(', '),
-                            vocab: vocabulary, // You can populate vocab later if needed
+                            vocab: vocabulary,
                         });
                     })
                     .catch((error) => console.error("Error fetching data:", error));
@@ -96,8 +96,8 @@ function KanjiInfo({ kanji }) {
                         <p className=" text-left text-2xl my-5">Related Vocabulary:</p>
                         <ul className="text-left text-xl w-full">
                             {apiInfo.vocab.map((v, index) => (
-                                <>
-                                <li key={index} className="  grid gap-2 grid-cols-3 w-full text-lg py-2 list-disc text-left">
+                                <div key={index}>
+                                <li className="  grid gap-2 grid-cols-3 w-full text-lg py-2 list-disc text-left">
                                     <div  className=" col-span-1 w-fit inline-block">
                                         <span className=" block text-sm text-gray-700 text-justify w-full">{v.variants[0].pronounced.split('')}</span>
                                         <span className=" block text-2xl font-medium w-full">{v.variants[0].written}</span>
@@ -106,7 +106,7 @@ function KanjiInfo({ kanji }) {
                                     {/* {v.variants[0].written} &ensp; <b>[</b>{v.variants[0].pronounced}<b>]</b> <br/> {v.meanings[0].glosses.join(', ')} */}
                                 </li>
                                 <hr className=" hidden border-t-2 border-opacity-30 border-white w-3/4 mx-auto my-3"></hr>
-                                </>
+                                </div>
                             ))}
                         </ul>
                     </div>

@@ -961,10 +961,13 @@
       if (KanjiCanvas["canvas_" + id].dataset.candidateList) {
         //document.getElementById(KanjiCanvas["canvas_" + id].dataset.candidateList).innerHTML = KanjiCanvas.fineClassification(extractedFeatures, candidates);
 		localStorage.setItem('predictions', KanjiCanvas.fineClassification(extractedFeatures, candidates))
+		localStorage.setItem('strokes', KanjiCanvas["recordedPattern_" + id].length)
 	}
       // otherwise log the result to the console if no candidateList is specified
       else {
 		localStorage.setItem('predictions', KanjiCanvas.fineClassification(extractedFeatures, candidates))
+		localStorage.setItem('strokes', KanjiCanvas["recordedPattern_" + id].length)
+
         // return KanjiCanvas.fineClassification(extractedFeatures, candidates);
       }
     };

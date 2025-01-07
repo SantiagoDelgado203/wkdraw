@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 /**
@@ -6,17 +8,45 @@ import { useEffect, useState } from "react";
  * @param {*} "Kanji - Kanji character to display. setKanji - State function to set parent's state to Kanji" 
  * @returns "span element/component, each with the onClick event to setKanji to kanji. Styled with TailwindCSS" 
  */
-function KanjiPrediction({ kanji, setKanji }){
-    return (
-        <span onClick={() => setKanji(kanji)} className=" mx-1 hover:cursor-pointer hover:font-bold">
+function KanjiPrediction({ id, kanji, setKanji, answerKanji, handleCorrect }){
+    
+    const auth = useContext(AuthContext);
+
+    useEffect(() => {
+        if (answerKanji){
+            if (kanji === answerKanji.KanjiCharacter){ 
+                document.getElementById("results").classList.add("border-5");
+                document.getElementById("results").classList.add("border-green-500");
+                document.getElementById("results").classList.add("shadow-lg");
+                // handleCorrect()
+            }
+        }
+    }, [answerKanji, kanji])
+
+    return auth ? (
+        <>
+        {
+            kanji === answerKanji.KanjiCharacter ? (
+                <span id={id} className=" mx-1 hover:cursor-pointer hover:font-bold" onClick={handleCorrect}>
+                    {kanji}
+                </span>
+            ) : (
+                <span id={id} className=" mx-1 hover:cursor-pointer hover:font-bold">
+                    {kanji}
+                </span>
+            )
+        }
+        </>
+    ) : (
+        <span id={id} onClick={() => setKanji(kanji)} className=" mx-1 hover:cursor-pointer hover:font-bold">
             {kanji}
         </span>
     )
     
 }
 
-function Canvas({ setKanji }){    
-    
+function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){    
+    const auth = useContext(AuthContext);
     //State to render component each time user draws a kanji and predictions are generated
     const [predictions, setPredictions] = useState('');
 
@@ -29,48 +59,86 @@ function Canvas({ setKanji }){
         //when clearing canvas, erase and set state to predictions
         document.getElementById("clearCanvas").addEventListener("click", () => {
             window.KanjiCanvas.erase('drawCanvas');
-            setPredictions(localStorage.getItem('predictions').split('').filter(char => char !== ' '));
+            // setPredictions(localStorage.getItem('predictions').split('').filter(char => char !== ' '));
+            setPredictions([])
         });
         //when undoLast canvas, erase and set state to predictions
         document.getElementById("undoLast").addEventListener("click", () => {
             window.KanjiCanvas.deleteLast('drawCanvas');
-            setPredictions(localStorage.getItem('predictions').split('').filter(char => char !== ' '));
+            let array = localStorage.getItem('predictions').split('').filter(char => char !== ' ')
+            // if(auth) setPredictions(array.slice(0,3))
+            // else 
+            setPredictions(array);
         });
         //when user finish stroke, set state to predictions
         document.getElementById("drawCanvas").addEventListener("touchend", () => {
             var array = localStorage.getItem('predictions').split('').filter(char => char !== ' ');
             // console.log(array)
+            // if(auth) setPredictions(array.slice(0,3))
+            // else 
             setPredictions(array);
         });
         document.getElementById("drawCanvas").addEventListener("mouseup", () => {
             var array = localStorage.getItem('predictions').split('').filter(char => char !== ' ');
             // console.log(array)
+            // if(auth) setPredictions(array.slice(0,3))
+            // else 
             setPredictions(array);
         });
+        if (auth) {
+            document.getElementById("nextKanjiButton").addEventListener("click", () => {
+                window.KanjiCanvas.erase('drawCanvas');
+                setPredictions([])
+            });
+        }
 
     }, []);
 
-
     return(
         <>
-        <script src="./scripts/kanji-canvas.js"></script>
-        <script src="./scripts/ref-patterns.js"></script>
             <div class=" md:w-8/12 lg:w-11/12 mx-auto">
-                <canvas 
-                    data-candidate-list="results" 
-                    id="drawCanvas"  
-                    class=" bg-[#2B2828] w-full md:w-96 lg:w-full h-80 lg:h-64 xl:h-[22em] inline-block">
-                </canvas>
-                <div class=" text-left text-sm flex flex-row justify-start mt-2">
-                    <button id="clearCanvas" class=" mx-1 px-5 py-2 bg-[#707070] text-gray-400 hover:text-white">Clear</button>
-                    <button id="undoLast" class=" mx-1 px-5 py-2 bg-[#707070] text-gray-400 hover:text-white">Undo</button>
-                </div><br/>
+                {auth ? (
+                <div className=" xl:text-xl mb-2">
+                    <label className=" font-semibold text-3xl"> 
+                        {answerKanji.Meanings.map((m) => m.meaning).join(" - ")}
+                    </label><br/>
+                    <label className=" font-thin italic">
+                        {answerKanji.Readings.map((r) => {
+                            if(r.type != "nanori")
+                            return [" " + r.reading + " (" + r.type + ")"]
+                            }).join('  ')}
+                    </label>
+                </div>
+                ) : (
+                    <></>
+                )}
+                <div className="w-full md:w-96 lg:w-full mx-auto">
+                    <canvas 
+                        data-candidate-list="results" 
+                        id="drawCanvas"  
+                        class=" bg-[#2B2828] w-full h-80  lg:h-64 xl:h-[22rem] inline-block">
+                    </canvas>
+                    <div class=" text-left text-sm grid grid-cols-10 gap-1 justify-start mt-2">
+                        <button id="clearCanvas" class=" col-span-3 xl:col-span-2 px-5 py-2 bg-[#707070] text-white hover:bg-gray-500">Clear</button>
+                        <button id="undoLast" class=" col-span-3 xl:col-span-2 px-5 py-2 bg-[#707070] text-white hover:bg-gray-500">Undo</button>
+                        {
+                            auth ? (
+                                <>
+                                <button onClick={nextKanji} id="nextKanjiButton" className=" col-span-4 xl:col-span-6 justify-self-end px-10 py-2 bg-red-500 text-white hover:bg-red-600">Next!</button>
+                                </>
+                            ) : (
+                                null
+                            )
+                        }
+                    </div><br/>
+                </div>
             </div>
             <div id="results" class=" w-fit bg-white inline-block text-xl xl:text-2xl px-4 py-2">
                 {
+
                     predictions ?
                     predictions.map((kanji, index) => (
-                        <KanjiPrediction key={index} kanji={kanji} setKanji={setKanji} />
+                        <KanjiPrediction key={index} id={index} kanji={kanji} answerKanji={answerKanji} setKanji={setKanji} handleCorrect={handleCorrect} />
                     )) : null
                 }
             </div>

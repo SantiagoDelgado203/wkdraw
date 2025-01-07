@@ -2,19 +2,28 @@ import { useEffect, useState } from 'react';
 import Canvas from './Canvas';
 import KanjiInfo from './KanjiInfo';
 
-function Guest({ setAPI }) {
+function Guest({ setAPI, formError, setLoading }) {
 
   const [kanji, setKanji] = useState(null);
   const [apiInput, setApiInput] = useState("");
 
   const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true)
     setAPI(apiInput);
   }
+
+  useEffect(() => {
+    localStorage.removeItem("predictions")
+    console.log("During Mounting Guest.js!")
+    console.log("Current API: ", localStorage.getItem("api"))
+    console.log("Current user: ", localStorage.getItem("user"))
+  }, [])
 
   return (
     <>
     <header class="w-full border-2 mx-auto block h-24 bg-white">
-            <div class=" flex flex-col md:flex-row h-full justify-around ">
+            <div class=" w-11/12 mx-auto flex flex-col md:flex-row h-full justify-around ">
                 <div class=" basis-1/2 content-center ml-5 text-left ">
                     <img src="#" alt="Logo" class="inline-block align-middle w-28 xl:w-52 h-16 border-2 border-red-50"/>
                     <div className='md:ml-10 align-middle inline-block'>
@@ -30,19 +39,21 @@ function Guest({ setAPI }) {
             </div>
     </header>
 
-    <main class="w-full mx-auto mb-20 flex flex-col lg:flex-row h-fit pt-14 px-3 md:px-0 text-base xl:text-lg ">
-      <div class=" basis-1/3 text-left md:px-16">
-        <h2 className="  font-semibold text-4xl italic my-5">
+    <main class="w-full mx-auto max-w-screen-2xl mb-20 flex flex-col lg:flex-row h-fit pt-14 px-3 md:px-0 text-base xl:text-lg ">
+
+      {/* Left Column - Information and Form */}
+      <div class="  basis-1/3 text-left md:px-16">
+        <h2 className="  font-semibold text-3xl lg:text-2xl xl:text-3xl italic my-5">
           What is WkDraw?
         </h2>
-        <p className=' text-xl font-thin'>
+        <p className=' text-xl lg:text-base xl:text-xl font-thin'>
           WkDraw is a practice tool to draw Japanese kanjis with the option to specifically review those you have learned so far in Wanikani. 
           Correct stroke order is not necessary, but encouraged!
         </p>
         <br/><br/>
         <form onSubmit={handleSubmit}>
-          <h2 className='font-semibold text-4xl italic my-5'>Use Wanikani API Token</h2>
-            <p className='text-xl font-thin'>
+          <h2 className='font-semibold text-3xl lg:text-2xl xl:text-3xl italic my-5'>Use Wanikani API Token</h2>
+            <p className=' text-xl lg:text-base xl:text-xl font-thin'>
               To practice kanjis you have learned in Wanikani.
             </p>
             <input 
@@ -50,15 +61,19 @@ function Guest({ setAPI }) {
               placeholder='v2API Token' 
               onChange={(e) => setApiInput(e.target.value)}
               className=' h-8 w-full my-2 focus:outline-none p-3 rounded-lg'/>
-            <button type='submit' className=' bg-[#707070] py-1 px-5 text-white rounded-xl'>Use API</button>
+            {!formError ? null : (
+              <label className=' text-red-500 text-sm block'> {formError} </label>
+            )}
+            <button type='submit' className=' bg-[#707070] my-2 py-1 px-5 text-white rounded-xl'>Use API</button>
         </form>
       </div><br/><br/><br/>
       
       {/* Central Column - Kanji Canvas & Predictions */}
-      <div class=" basis-1/3 text-center">
-        <Canvas setKanji={setKanji} />
+      <div class="  basis-1/3 text-center">
+        <Canvas from={"guest"} setKanji={setKanji} />
       </div><br/>
 
+      {/* Right Column - Kanjiinfo and SVG */}
       <div class=" basis-1/3 text-center md:px-16">
         <KanjiInfo kanji={kanji} />
       </div><br/>

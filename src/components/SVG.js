@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function SVG({ unicode, setLoading, children }) {
+function SVG({ unicode, setLoading }) {
     //State to control the changing svg file in display
     const [svgContent, setSvgContent] = useState(null);
 
