@@ -28,13 +28,14 @@ function AnswerSVG ({ unicode }) {
 
   const toggleCover = () => {
     document.getElementById("answerCover1").classList.toggle("hidden")
+    document.getElementById("svg-container").classList.toggle("hidden")
     document.getElementById("svg-container").classList.replace("border-green-600", "border-red-600" )
-
+    document.getElementById("svg-container").classList.remove('blur-none')
+    document.getElementById("svg-container").classList.add('blur-md')
   }
 
   const addBlur = () =>{
-    document.getElementById("svg-container").classList.remove('blur-none')
-    document.getElementById("svg-container").classList.add('blur-md')
+    
   }
 
   const handleShowAnswer = () =>{  
@@ -42,24 +43,24 @@ function AnswerSVG ({ unicode }) {
     const svgElement = document.querySelector("svg");
     svgElement.classList.add("kanjiVG");
     new window.KanjivgAnimate(".kanjiVG", 650);
-    document.getElementById("answerCover2").classList.add("hidden")
+    // document.getElementById("svg-container").classList.add("hidden")
   }
 
   return (
-    <div onLoad={toggleCover} className=" basis-full md:basis-5/12 lg:h-fit w-full h-fit  text-center mx-auto mb-3 rounded-lg relative">
-        <div onClick={toggleCover} id="answerCover1" 
-            className=" absolute top-0  w-full h-64 bg-black opacity-100 z-20 text-white content-center rounded-lg text-3xl xl:text-5xl italic font-thin">
-                Show Blurred Answer
-        </div>
-        <div id="answerCover2" onClick={handleShowAnswer} className=" absolute top-0  w-full h-64 z-10 text-3xl content-center xl:text-5xl italic font-thin"> Show Clear Answer </div>
-        {svgContent ? (
-        <div onLoad={addBlur}  id="svg-container"
-          dangerouslySetInnerHTML={{ __html: svgContent }}
-          className="relative blur-md z-0 border-2 border-red-600 shadow-lg shadow-current rounded-lg bg-white"
-        />
-        ) : (
-            <p>Loading...</p>
-        )}
+    <div onLoad={toggleCover} className=" basis-full md:basis-6/12 lg:h-fit w-full h-fit bg-[#f4f4f4] text-left mx-auto md:mx-2 mb-3 p-5 rounded-lg">
+      <span className=" font-normal md:font-light mb-2 inline-block text-lg xl:text-xl">Answer</span>
+      <div onClick={toggleCover} id="answerCover1" 
+          className="  w-full h-64 bg-black opacity-100 z-20 text-white text-center content-center rounded-lg text-3xl xl:text-5xl italic font-thin">
+              {/* Show Blurred Answer */}
+      </div>
+      {svgContent ? (
+      <div onLoad={addBlur} onClick={handleShowAnswer}  id="svg-container"
+        dangerouslySetInnerHTML={{ __html: svgContent }}
+        className=" hidden blur-md z-0 border-2 border-red-600 shadow-lg shadow-current rounded-lg bg-white"
+      />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

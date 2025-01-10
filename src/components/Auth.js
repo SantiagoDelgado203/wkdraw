@@ -92,8 +92,9 @@ function Auth({ setAPI, user }) {
         document.getElementById("main").classList.toggle("opacity-30")
         document.getElementById("correct_message").classList.toggle("hidden")
         document.getElementById("answerCover1").classList.add("hidden")
-        document.getElementById("answerCover2").classList.add("hidden")
+        // document.getElementById("answerCover2").classList.add("hidden")
         document.getElementById("svg-container").classList.add("blur-none") 
+        document.getElementById("svg-container").classList.remove("hidden") 
         document.getElementById("svg-container").classList.replace("border-red-600", "border-green-600")
         const svgElement = document.querySelector("svg");
       svgElement.classList.add("kanjiVG");
@@ -113,8 +114,9 @@ function Auth({ setAPI, user }) {
       kanjiQueue.current.dequeue()
       setKanji(kanjiQueue.current.peek())
       document.getElementById("answerCover1").classList.remove("hidden")
-      document.getElementById("answerCover2").classList.remove("hidden")
-      document.getElementById("svg-container").classList.remove("blur-none") 
+      // document.getElementById("answerCover2").classList.remove("hidden")
+      document.getElementById("svg-container").classList.remove("blur-none")
+      document.getElementById("svg-container").classList.add("hidden")
     }
 
     const chooseLevelRange = () => {
@@ -341,14 +343,14 @@ function Auth({ setAPI, user }) {
         </div><br/><br/><br/>
         
         {/* Central Column - Kanji Canvas & Predictions */}
-        <div class="  basis-1/3 text-center">
+        <div class="  basis-1/3 text-center mx-auto">
           <AuthContext.Provider value={true}>
               <Canvas answerKanji={kanji} handleCorrect={handleCorrect} nextKanji={nextKanji} />
           </AuthContext.Provider>
         </div><br/>
 
         {/* Right Column - SVG & Hints */}
-        <div class=" flex flex-col md:flex-row lg:flex-col md:justify-start basis-1/3 md:px-10 xl:px-16">
+        <div class=" flex flex-col md:flex-row lg:flex-col  md:justify-evenly basis-1/3 md:px-5 xl:px-16">
           <AnswerSVG unicode={kanji.KanjiCharacter.codePointAt(0).toString(16).toUpperCase().padStart(5, "0")} />
           <Hints radicals={kanji.RadicalsIDs.map((id) => radicals.current[id])} mnemonic={kanji.MeaningMnemonic} />
         </div>
@@ -357,7 +359,7 @@ function Auth({ setAPI, user }) {
 
         {/* Correct Message */}
         <div id='correct_message' onClick={handleCorrect} className=' hidden absolute w-screen h-screen right-0 top-0 z-0 content-center'>
-            <div className=' w-96 mx-auto bg-white h-fit rounded-xl p-5 border-4 border-green-600'>
+            <div className='  w-11/12 md:w-96 mx-auto bg-white h-fit rounded-xl p-5 border-4 border-green-600'>
                 <p className=' mx-auto'>Correct!</p>
                 {/* <button onClick={handleCorrect} className=' right-0 p-2 bg-black text-white rounded-lg'> Ok! </button> */}
             </div>

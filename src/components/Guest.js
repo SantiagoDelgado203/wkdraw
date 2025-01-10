@@ -42,39 +42,44 @@ function Guest({ setAPI, formError, setLoading }) {
     <main class="w-full mx-auto max-w-screen-2xl mb-20 flex flex-col lg:flex-row h-fit pt-14 px-3 md:px-0 text-base xl:text-lg ">
 
       {/* Left Column - Information and Form */}
-      <div class="  basis-1/3 text-left md:px-16">
-        <h2 className="  font-semibold text-3xl lg:text-2xl xl:text-3xl italic my-5">
+      <div class="  basis-1/3 text-left md:px-5 xl:px-14">
+      <div className=' rounded-md bg-[#f4f4f4] w-fit px-5 py-3'>
+        <h2 className="  font-light text-3xl lg:text-2xl xl:text-xl  my-3">
           What is WkDraw?
         </h2>
-        <p className=' text-xl lg:text-base xl:text-xl font-thin'>
+        <p className=' bg-white rounded-lg block p-5 my-5 text-lg lg:text-base xl:text-lg font-thin'>
           WkDraw is a practice tool to draw Japanese kanjis with the option to specifically review those you have learned so far in Wanikani. 
           Correct stroke order is not necessary, but encouraged!
         </p>
-        <br/><br/>
-        <form onSubmit={handleSubmit}>
-          <h2 className='font-semibold text-3xl lg:text-2xl xl:text-3xl italic my-5'>Use Wanikani API Token</h2>
-            <p className=' text-xl lg:text-base xl:text-xl font-thin'>
+        <br/>
+        <h2 className='font-light text-3xl lg:text-2xl xl:text-xl my-3'>Use Wanikani API Token</h2>
+        <form className='' onSubmit={handleSubmit}>
+          <div className=' bg-white rounded-lg p-5 my-5'>
+            <p className='  text-lg lg:text-base xl:text-lg font-thin'>
               To practice kanjis you have learned in Wanikani.
             </p>
             <input 
               type='text' 
               placeholder='v2API Token' 
               onChange={(e) => setApiInput(e.target.value)}
-              className=' h-8 w-full my-2 focus:outline-none p-3 rounded-lg'/>
+              className=' bg-[#e9e9e9] h-8 w-full my-2 focus:outline-none p-3 rounded-lg text-lg xl:text-base'/>
+          </div>
             {!formError ? null : (
               <label className=' text-red-500 text-sm block'> {formError} </label>
             )}
-            <button type='submit' className=' bg-[#707070] my-2 py-1 px-5 text-white rounded-xl'>Use API</button>
+            <button type='submit' className=' py-1 px-5 rounded-sm border-2 text-black font-thin'>Use API</button>
         </form>
+
+      </div>
       </div><br/><br/><br/>
       
       {/* Central Column - Kanji Canvas & Predictions */}
-      <div class="  basis-1/3 text-center">
-        <Canvas from={"guest"} setKanji={setKanji} />
+      <div class="  basis-1/3 text-center mx-auto">
+        <Canvas setKanji={setKanji} />
       </div><br/>
 
       {/* Right Column - Kanjiinfo and SVG */}
-      <div class=" basis-1/3 text-center md:px-16">
+      <div class=" basis-1/3 md:px-5 xl:px-14">
         <KanjiInfo kanji={kanji} />
       </div><br/>
     </main>

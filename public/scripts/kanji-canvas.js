@@ -73,7 +73,7 @@
     KanjiCanvas["ctx_" + id].lineCap = "round";
     //KanjiCanvas["ctx_" + id].lineJoin = "round";
     //KanjiCanvas["ctx_" + id].lineMiter = "round";
-    KanjiCanvas["ctx_" + id].lineWidth = 10;
+    KanjiCanvas["ctx_" + id].lineWidth = 7;
     KanjiCanvas["ctx_" + id].stroke();
     KanjiCanvas["ctx_" + id].closePath();
 

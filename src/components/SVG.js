@@ -34,7 +34,7 @@ function SVG({ unicode, setLoading }) {
     }, [svgContent]);
 
     return (
-        <div className=" size-fit bg-white mx-auto lg:mx-0 text-center content-center"
+        <div className=" bg-white mx-auto lg:mx-auto text-center content-center rounded-md shadow-lg"
             dangerouslySetInnerHTML={{ __html: svgContent }}
             >
         </div>

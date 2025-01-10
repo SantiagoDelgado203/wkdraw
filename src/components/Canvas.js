@@ -95,28 +95,49 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
     }, []);
 
     return(
-        <>
-            <div class=" md:w-8/12 lg:w-11/12 mx-auto">
+        <div className=" bg-[#f4f4f4] p-5 lg:px-1 rounded-lg mx-auto">
+            {/* <div className=" text-left w-11/12">
+                <label className=" font-light lg:text-2xl text-base mb-5 block">Canvas</label>
+            </div> */}
+            <div class=" lg:w-11/12 mx-auto ">
                 {auth ? (
-                <div className=" xl:text-xl mb-2">
-                    <label className=" font-semibold text-3xl"> 
+                <div className=" xl:text-xl mb-2 text-center">
+                    <span className=" font-normal text-xl xl:text-3xl mx-auto"> 
                         {answerKanji.Meanings.map((m) => m.meaning).join(" - ")}
-                    </label><br/>
-                    <label className=" font-thin italic">
-                        {answerKanji.Readings.map((r) => {
-                            if(r.type != "nanori")
-                            return [" " + r.reading + " (" + r.type + ")"]
-                            }).join('  ')}
-                    </label>
+                    </span><br/>
+                    <div className="font-thin italic">
+                        <span className=" ">
+                            On: {" "}
+                            {
+                            answerKanji.Readings
+                            .filter(reading => reading.type === "onyomi")
+                            .flatMap(reading => reading.reading)
+                            .join(", ")
+                            }
+                        </span><br/>
+                        <span className=" ">
+                            Kun: {" "}
+                            {
+                            answerKanji.Readings
+                            .filter(reading => reading.type === "kunyomi")
+                            .flatMap(reading => reading.reading)
+                            .join(", ")
+                            }
+                        </span><br/>
+                    </div>
                 </div>
                 ) : (
-                    <></>
+                    <>
+                    {/* <div className=" text-left w-11/12">
+                        <label className=" font-light lg:text-2xl text-base mb-5 block">Canvas</label>
+                    </div> */}
+                    </>
                 )}
                 <div className="w-full md:w-96 lg:w-full mx-auto">
                     <canvas 
                         data-candidate-list="results" 
                         id="drawCanvas"  
-                        class=" bg-[#2B2828] w-full h-80  lg:h-64 xl:h-[22rem] inline-block">
+                        class=" bg-[#2B2828] w-full h-64 lg:h-64 xl:h-[22rem] inline-block">
                     </canvas>
                     <div class=" text-left text-sm grid grid-cols-10 gap-1 justify-start mt-2">
                         <button id="clearCanvas" class=" col-span-3 xl:col-span-2 px-5 py-2 bg-[#707070] text-white hover:bg-gray-500">Clear</button>
@@ -130,19 +151,18 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
                                 null
                             )
                         }
-                    </div><br/>
+                    </div>
                 </div>
             </div>
-            <div id="results" class=" w-fit bg-white inline-block text-xl xl:text-2xl px-4 py-2">
+            <div id="results" class=" w-fit bg-white inline-block text-lg xl:text-2xl px-4 py-2 mt-5  shadow-lg">
                 {
-
                     predictions ?
                     predictions.map((kanji, index) => (
                         <KanjiPrediction key={index} id={index} kanji={kanji} answerKanji={answerKanji} setKanji={setKanji} handleCorrect={handleCorrect} />
                     )) : null
                 }
             </div>
-        </>
+        </div>
     )
 }
 
