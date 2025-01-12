@@ -12,7 +12,7 @@ function KanjiSetOptions ({ handleSorting, chooseLevelRange }) {
             if(element.id !== sort) element.classList.add("text-gray-400")
         });
         document.getElementById(sort).classList.add("underline", "font-semibold");    
-        document.getElementById(sort).classList.replace("text-gray-400", "text-black");    
+        document.getElementById(sort).classList.replace("text-gray-400", "text-black");
         if (sort === "chooseLevel"){
             chooseLevelRange()
             return

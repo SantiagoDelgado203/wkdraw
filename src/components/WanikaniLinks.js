@@ -30,7 +30,7 @@ function WanikaniLinks({ kanji_links }) {
             </div>
             <div id="links" className=" lg:flex lg:flex-wrap hidden bg-white p-5 rounded-lg text-lg lg:text-xl xl:text-2xl lg:text-left ">
                 {[...kanji_links].reverse().map((entry) => (
-                    <a className=" inline-block p-2 my-1 mx-1  bg-black rounded-lg text-white"
+                    <a className=" inline-block p-2 my-1 mx-1  bg-[#fa00a7] shadow-wk rounded-lg text-white"
                     href={entry.kanjiUrl} rel="noreferrer" target="_blank" >{entry.kanji}</a>
                 ))}
             </div>

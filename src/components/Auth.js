@@ -143,6 +143,14 @@ function Auth({ setAPI, user }) {
               );
               break;
             case "chooseLevel":
+              if(levelRange.current[0] > levelRange.current[1]){
+                alert("Input a valid range! >:(")
+                newSort = new Map(
+                  shuffleArray([...kanjiDictionary.current.entries()])
+                )
+                chooseLevelRange()
+                break;
+              }
               newSort = new Map(
                 kanjiDictionary.current.entries()
                   .filter(([, entry]) => entry.Level >= levelRange.current[0] && entry.Level <= levelRange.current[1])
@@ -372,16 +380,16 @@ function Auth({ setAPI, user }) {
                 e.preventDefault()
                 handleSorting("chooseLevel")
               }}>
-                <p className=' mb-5 lg:text-2xl font-semibold italic'>Choose Level Range:</p>
+                <p className=' mb-5 lg:text-2xl'>Choose Level Range</p>
                 From: 
-                <select className=' border-2 border-gray-500 mx-3' onChange={(e) => levelRange.current[0] = e.target.value}>
+                <select className=' inline-block mx-3 border-0 border-b-2 border-gray-500 py-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-500 ' onChange={(e) => levelRange.current[0] = e.target.value}>
                   {options.map((number) => (
                     <option key={number} value={number}>
                       {number}
                     </option>
                   ))}
                 </select> To:
-                <select className=' border-2 border-gray-500 mx-3' onChange={(e) => levelRange.current[1] = e.target.value}>
+                <select className=' inline-block mx-3 border-0 border-b-2 border-gray-500 py-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-500 ' onChange={(e) => levelRange.current[1] = e.target.value}>
                 {options.map((number) => (
                   <option key={number} value={number}>
                     {number}
@@ -389,7 +397,7 @@ function Auth({ setAPI, user }) {
                 ))}
                 </select>
                 <div className=' mt-5 w-full flex flex-row-reverse items-end mr-0 ml-auto'>
-                  <button type='submit' className='  px-3 py-1 mt-3 rounded-lg bg-gray-400'>Use Level Range</button>
+                  <button type='submit' className='  px-3 py-1 mt-3 rounded-lg bg-gray-400 text-white'>Use Level Range</button>
                   {/* <label onClick={() => {
                     chooseLevelRange()
                   }} className=' text-red-500 hover:text-red-900 hover:cursor-pointer mx-5'>Cancel</label> */}

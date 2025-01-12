@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Popover, Button } from 'flowbite-react';
 import SVG from './SVG';
 
 function KanjiInfo({ kanji }) {
@@ -86,10 +87,23 @@ function KanjiInfo({ kanji }) {
     return (
         <div className=" h-fit w-70 mx-auto bg-[#f4f4f4] p-5 rounded-lg">
             <span className=" mb-5 inline-block text-left font-light text-base lg:text-lg">Dictionary</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-                class=" inline-block size-5 align-middle mx-3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-            </svg>
+            <Popover
+                trigger="hover"
+                placement="top"
+                aria-labelledby="default-popover"
+                content={
+                    <div className=" bg-white text-black text-base p-3 max-w-56 text-center border-2 border-black rounded-lg">
+                        Click a prediction below the canvas to see definitions, readings, and vocabulary!
+                    </div>
+                }
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                    class=" inline-block size-5 align-middle mx-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+            </Popover>
+
+            
 
             {apiInfo.unicode ? (
                 <div className="  relative h-full">
@@ -107,7 +121,7 @@ function KanjiInfo({ kanji }) {
                                     <li className="  grid gap-2 grid-cols-5 w-full text-lg py-2 list-disc text-left">
                                         <div  className=" col-span-2 w-fit inline-block">
                                             <span className=" block text-sm text-gray-700 text-justify w-full">{v.variants[0].pronounced.split('')}</span>
-                                            <span className=" block bg-[#a600fa] p-1 px-2 text-white rounded-md align-middle text-2xl text-center font-medium w-fit">{v.variants[0].written}</span>
+                                            <span className=" block bg-[#a600fa] shadow-wk p-1 px-2 text-white rounded-md align-middle text-2xl text-center font-medium w-fit">{v.variants[0].written}</span>
                                         </div>
                                         <p className=" self-center col-span-3 inline-block text-base">{v.meanings[0].glosses.join(', ')}</p>
                                         {/* {v.variants[0].written} &ensp; <b>[</b>{v.variants[0].pronounced}<b>]</b> <br/> {v.meanings[0].glosses.join(', ')} */}
@@ -119,18 +133,17 @@ function KanjiInfo({ kanji }) {
                         </div>
                     </div>
                     <div id="loading_cover" className=" relative top-0 left-0 w-full h-96 text-5xl text-white content-center">
-                        {/* <label>Loading...</label> */}
+                        {/* Loading */}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" 
-                            class="size-24 mx-auto block">
+                            class="size-24 mx-auto block animate-spin">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                         </svg>
                     </div>
                 </div>
             ) : (
                 <div className=" bg-[#f4f4f4] rounded-lg h-fit content-center text-left mx-auto w-full"> 
-                    <p className=" bg-white p-5 rounded-md h-96 content-center text-center">
-                        {/* Click a prediction to show a kanji with stroke order and animations! */}
-                    </p>
+                    {/* Place to put a logo */}
+                    <p className=" bg-white p-5 rounded-md h-96 content-center text-center"></p>
                 </div>
             )
             }

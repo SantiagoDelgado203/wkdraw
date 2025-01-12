@@ -159,7 +159,11 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
                     predictions ?
                     predictions.map((kanji, index) => (
                         <KanjiPrediction key={index} id={index} kanji={kanji} answerKanji={answerKanji} setKanji={setKanji} handleCorrect={handleCorrect} />
-                    )) : null
+                    )) : (
+                        auth ? (
+                            <span className=" text-base italic font-thin ">Click a prediction to check if you got the correct answer!</span>
+                        ):null
+                    )
                 }
             </div>
         </div>

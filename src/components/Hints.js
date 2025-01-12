@@ -21,10 +21,26 @@ function Hints({ radicals, mnemonic }) {
         const radical_tags = document.getElementsByTagName("radical")
         const kanji_tags = document.getElementsByTagName("kanji")
         for (let i = 0; i < radical_tags.length; i++) {
-            radical_tags[i].classList.add('text-white', 'px-2', 'bg-[#00aaff]', 'rounded-md', 'align-middle', 'inline-block')
+            radical_tags[i].classList.add(
+                'text-white', 
+                'px-2',
+                'bg-[#00aaff]', 
+                'rounded-md', 
+                'align-middle', 
+                'inline-block',
+                'shadow-wk',
+            )
         }
         for (let i = 0; i < kanji_tags.length; i++) {
-            kanji_tags[i].classList.add('text-white', 'px-2', 'bg-[#fa00a7]', 'rounded-md', 'align-middle', 'inline-block');
+            kanji_tags[i].classList.add(
+                'text-white', 
+                'px-2', 
+                'bg-[#fa00a7]', 
+                'rounded-md', 
+                'align-middle', 
+                'inline-block',
+                'shadow-wk'
+            );
         }
     },)
 

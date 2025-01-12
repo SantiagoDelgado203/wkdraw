@@ -47,7 +47,7 @@ function Guest({ setAPI, formError, setLoading }) {
         <h2 className="  font-light text-3xl lg:text-2xl xl:text-xl  my-3">
           What is WkDraw?
         </h2>
-        <p className=' bg-white rounded-lg block p-5 my-5 text-lg lg:text-base xl:text-lg font-thin'>
+        <p className=' bg-white rounded-lg block p-5 my-5 text-lg lg:text-base xl:text-base font-thin'>
           WkDraw is a practice tool to draw Japanese kanjis with the option to specifically review those you have learned so far in Wanikani. 
           Correct stroke order is not necessary, but encouraged!
         </p>
@@ -55,14 +55,17 @@ function Guest({ setAPI, formError, setLoading }) {
         <h2 className='font-light text-3xl lg:text-2xl xl:text-xl my-3'>Use Wanikani API Token</h2>
         <form className='' onSubmit={handleSubmit}>
           <div className=' bg-white rounded-lg p-5 my-5'>
-            <p className='  text-lg lg:text-base xl:text-lg font-thin'>
-              To practice kanjis you have learned in Wanikani.
+            <p className='  text-lg lg:text-base xl:text-base font-thin'>
+              To practice kanjis you have learned in Wanikani. You can find/generate your token&nbsp;
+                <a href='https://www.wanikani.com/settings/personal_access_tokens' rel='nonreferral' target='_blank'
+                  className=' underline text-blue-500'>here</a>.
+                Only the "all_data:read" permission is needed. 
             </p>
             <input 
               type='text' 
               placeholder='v2API Token' 
               onChange={(e) => setApiInput(e.target.value)}
-              className=' bg-[#e9e9e9] h-8 w-full my-2 focus:outline-none p-3 rounded-lg text-lg xl:text-base'/>
+              className=' bg-[#e9e9e9] h-8 w-full my-2 focus:outline-none p-3 rounded-lg text-lg xl:text-sm'/>
           </div>
             {!formError ? null : (
               <label className=' text-red-500 text-sm block'> {formError} </label>
