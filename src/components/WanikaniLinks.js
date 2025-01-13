@@ -16,7 +16,7 @@ function WanikaniLinks({ kanji_links }) {
     return (
         <div className=" lg:block basis-full md:basis-5/12 w-full lg:basis-auto md:h-fit bg-[#f4f4f4] text-center mx-auto mt-5 md:mt-0 lg:mt-5 p-2 md:p-5  md:rounded-lg">
             <div className=" flex flex-row text-left items-center">
-                <label className="grow mx-2 text-lg font-normal xl:text-xl md:font-light content-center md:mb-3">Wanikani Links</label>
+                <span className="grow mx-2 text-lg font-normal xl:text-xl md:font-light content-center md:mb-3">Wanikani Links</span>
                 <svg id="dropdown_down_links" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
                     class="size-8  inline-block lg:hidden"
                     onClick={handleDropDown}>

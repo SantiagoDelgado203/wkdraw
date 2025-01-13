@@ -2,14 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/logo64.png" />
+    <!-- SEO Metadata -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Santiago Delgado" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="keywords" content="kanji, wanikani, practice, dictionary, japanese, WkDraw, drawing kanji"/>
+    <meta name="application-name" content="WkDraw" />
+    <meta name="description" content="Kanji drawing practice tool integrating the Wanikani V2 API"/>
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="WkDraw - Kanji Drawing Practice Tool" />
+    <meta property="og:description" content="Learn and practice kanji with WkDraw, integrating kanji recognition and the Wanikani API." />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta property="og:url" content="https://www.wkdraw.com" />
+    
+    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -28,12 +35,12 @@
     <script src="%PUBLIC_URL%/scripts/kanji-canvas.js"></script>
     <script src="%PUBLIC_URL%/scripts/ref-patterns.js"></script>
     <script src="%PUBLIC_URL%/scripts/KanjivgAnimate.js"></script>
-     <script src="%PUBLIC_URL%/scripts/flowbite.min.js"></script>
-
+    <script src="%PUBLIC_URL%/scripts/flowbite.min.js"></script>
   </head>
-  <body class="bg-[#e9e9e9] mx-auto">
+  <body class="bg-[#e9e9e9] mx-auto max-w-screen-2xl">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

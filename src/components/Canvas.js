@@ -96,15 +96,14 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
 
     return(
         <div className=" bg-[#f4f4f4] p-5 lg:px-1 rounded-lg mx-auto">
-            {/* <div className=" text-left w-11/12">
-                <label className=" font-light lg:text-2xl text-base mb-5 block">Canvas</label>
-            </div> */}
             <div class=" lg:w-11/12 mx-auto ">
                 {auth ? (
                 <div className=" xl:text-xl mb-2 text-center">
-                    <span className=" font-normal text-xl xl:text-3xl mx-auto"> 
+                    {/* Meanings */}
+                    <span className=" font-normal text-2xl xl:text-3xl mx-auto"> 
                         {answerKanji.Meanings.map((m) => m.meaning).join(" - ")}
                     </span><br/>
+                    {/* Readings */}
                     <div className="font-thin italic">
                         <span className=" ">
                             On: {" "}
@@ -129,7 +128,7 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
                 ) : (
                     <>
                     {/* <div className=" text-left w-11/12">
-                        <label className=" font-light lg:text-2xl text-base mb-5 block">Canvas</label>
+                        <span className=" font-light lg:text-2xl text-base mb-5 block">Canvas</spa>
                     </div> */}
                     </>
                 )}
@@ -137,7 +136,7 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
                     <canvas 
                         data-candidate-list="results" 
                         id="drawCanvas"  
-                        class=" bg-[#2B2828] w-full h-64 lg:h-64 xl:h-[22rem] inline-block">
+                        class=" bg-[#2B2828] w-full h-80 lg:h-64 xl:h-[22rem] inline-block">
                     </canvas>
                     <div class=" text-left text-sm grid grid-cols-10 gap-1 justify-start mt-2">
                         <button id="clearCanvas" class=" col-span-3 xl:col-span-2 px-5 py-2 bg-[#707070] text-white hover:bg-gray-500">Clear</button>
@@ -154,14 +153,14 @@ function Canvas({ setKanji, answerKanji, handleCorrect, nextKanji }){
                     </div>
                 </div>
             </div>
-            <div id="results" class=" w-fit bg-white inline-block text-lg xl:text-2xl px-4 py-2 mt-5  shadow-lg">
+            <div id="results" class=" w-fit bg-white inline-block text-lg xl:text-2xl px-4 py-2 mt-5 ">
                 {
                     predictions ?
                     predictions.map((kanji, index) => (
                         <KanjiPrediction key={index} id={index} kanji={kanji} answerKanji={answerKanji} setKanji={setKanji} handleCorrect={handleCorrect} />
                     )) : (
                         auth ? (
-                            <span className=" text-base italic font-thin ">Click a prediction to check if you got the correct answer!</span>
+                            <span className=" text-base italic font-thin ">Click a result to check if you got the correct answer!</span>
                         ):null
                     )
                 }

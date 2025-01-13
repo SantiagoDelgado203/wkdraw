@@ -1,3 +1,4 @@
+import { Popover } from "flowbite-react";
 import { useEffect, useState } from "react";
 
 function AnswerSVG ({ unicode }) {
@@ -44,7 +45,24 @@ function AnswerSVG ({ unicode }) {
 
   return (
     <div className=" basis-full md:basis-6/12 lg:h-fit w-full h-fit bg-[#f4f4f4] text-left mx-auto md:mx-2 mb-3 p-5 rounded-lg">
-      <span className=" font-normal md:font-light mb-2 inline-block text-lg xl:text-xl">Answer</span>
+      <div className=" mb-5 content-center align-middle">
+        <span className=" font-normal md:font-light inline-block text-lg xl:text-xl">Answer</span>
+        <Popover
+          trigger="hover"
+          placement="top"
+          aria-labelledby="default-popover"
+          content={
+              <div className=" bg-white text-black text-base font-light p-3 max-w-56 text-center shadow-lg rounded-lg">
+                  Click to animate!
+              </div>
+          }
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+              class=" inline-block h-fit size-6 align-text-bottom mx-3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+          </svg>
+        </Popover>
+      </div>
       <div onClick={removeCover} id="answerCover1" 
           className="  w-full h-64 bg-black opacity-100 z-20 text-white content-center rounded-lg">
       </div>
@@ -54,7 +72,7 @@ function AnswerSVG ({ unicode }) {
         className=" hidden blur-md z-0 border-2 border-red-600 shadow-lg shadow-current rounded-lg bg-white"
       />
       ) : (
-        <p>Loading...</p>
+        <span>Loading...</span>
       )}
     </div>
   );

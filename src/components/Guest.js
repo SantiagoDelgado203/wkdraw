@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Canvas from './Canvas';
 import KanjiInfo from './KanjiInfo';
+import Footer from './Footer';
 
 function Guest({ setAPI, formError, setLoading }) {
 
@@ -24,16 +25,16 @@ function Guest({ setAPI, formError, setLoading }) {
     <>
     <header class="w-full border-2 mx-auto block h-24 bg-white">
             <div class=" w-11/12 mx-auto flex flex-col md:flex-row h-full justify-around ">
-                <div class=" basis-1/2 content-center ml-5 text-left ">
-                    <img src="#" alt="Logo" class="inline-block align-middle w-28 xl:w-52 h-16 border-2 border-red-50"/>
+                <div class=" basis-1/2 content-center ml-5 text-left font-serif">
+                    {/* <img src="#" alt="Logo" class="inline-block align-middle w-28 xl:w-52 h-16 border-2 border-red-50"/> */}
                     <div className='md:ml-10 align-middle inline-block'>
-                      <h1 class="text-2xl md:text-3xl xl:text-5xl inline font-semibold">WkDraw</h1>
+                      <h1 class="text-3xl md:text-3xl xl:text-4xl inline font-normal italic ">WkDraw</h1>
                       <br /><p>Kanji Drawing Practice Tool</p>
                     </div>
                 </div>
                 <div class="hidden md:flex flex-row-reverse xl:basis-1/2">
                     <div class="  text-xl italic font-thin basis-2/4 text-center content-center ">
-                        <p>You are logged in as a Guest!</p>
+                        {/* <span>You are logged in as a Guest!</span> */}
                     </div>
                 </div>
             </div>
@@ -57,7 +58,7 @@ function Guest({ setAPI, formError, setLoading }) {
           <div className=' bg-white rounded-lg p-5 my-5'>
             <p className='  text-lg lg:text-base xl:text-base font-thin'>
               To practice kanjis you have learned in Wanikani. You can find/generate your token&nbsp;
-                <a href='https://www.wanikani.com/settings/personal_access_tokens' rel='nonreferral' target='_blank'
+                <a href='https://www.wanikani.com/settings/personal_access_tokens' rel='noreferrer' target='_blank'
                   className=' underline text-blue-500'>here</a>.
                 Only the "all_data:read" permission is needed. 
             </p>
@@ -68,7 +69,7 @@ function Guest({ setAPI, formError, setLoading }) {
               className=' bg-[#e9e9e9] h-8 w-full my-2 focus:outline-none p-3 rounded-lg text-lg xl:text-sm'/>
           </div>
             {!formError ? null : (
-              <label className=' text-red-500 text-sm block'> {formError} </label>
+              <span className=' text-red-500 text-sm block'> {formError} </span>
             )}
             <button type='submit' className=' py-1 px-5 rounded-sm border-2 text-black font-thin'>Use API</button>
         </form>
@@ -88,28 +89,7 @@ function Guest({ setAPI, formError, setLoading }) {
     </main>
     <hr className='my-5 shadow-xl hidden'></hr>
 
-    <footer className='h-fit mb-5 w-full'>
-      <div className='mx-auto h-full w-full xl:w-9/12 px-5 flex flex-col lg:flex-row text-sm flex-wrap'>
-        <p className=' basis-full flex-grow my-10'>WkDraw is a personal project, a simple aplication I thought would help me enormously while studying kanji with Wanikani! I hope anyone that reads this finds it helpful, please notify any bug or suggest imporvements to my email: santiagodelgado@gmail.com.</p>
-        <p className=' basis-1/3 xl:px-5'>
-          The &nbsp;
-          <a href='https://asdfjkl.github.io/kanjicanvas/' rel="noreferrer" target='_blank' className=' underline text-blue-800'>Kanji Canvas</a> recognition algorithm code was made by Dominik Klein and Seth Clydsedale, code can be found&nbsp;
-          <a href='https://github.com/asdfjkl/kanjicanvas' rel="noreferrer" target='_blank' className=' underline text-blue-800'>here.</a>
-        </p><br/>
-        <p className=' basis-1/3 xl:px-5'>
-          Kanji illustrations are provided by the&nbsp;
-          <a href='https://kanjivg.tagaini.net/' rel="noreferrer" target='_blank' className=' underline text-blue-800'>KanjiVG project</a> created by Ulrich Apel, accessible&nbsp;
-          <a href='https://github.com/KanjiVG/kanjivg' rel="noreferrer" target='_blank' className=' underline text-blue-800'>here.</a><br/><br/>
-          Kanji animations are possible thanks to theKanjiVGAnimate project, by NihongoDera. Check it out&nbsp;
-          <a href='https://github.com/nihongodera/kanjivganimate' rel="noreferrer" className=' underline text-blue-800' target='_blank'>here.</a>
-        </p><br/>
-        <p className=' basis-1/3 xl:px-5'>
-          Kanji meanings, readings, and example words in Guest mode are obtained from&nbsp;
-          <a href='https://kanjiapi.dev/' rel="noreferrer" className=' underline text-blue-800' target='_blank'>Kanjiapi.dev</a>, developed by Iridium Szreter.
-        </p>
-      </div>
-    </footer>
-
+    <Footer></Footer>
     </>
   );
 }

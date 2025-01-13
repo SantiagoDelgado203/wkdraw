@@ -5,6 +5,7 @@ import WanikaniLinks from './WanikaniLinks';
 import AnswerSVG from './AnswerSVG';
 import Hints from './Hints';
 import Canvas from './Canvas';
+import Footer from './Footer';
 
 const wk_api_path = "https://api.wanikani.com/v2/"
 
@@ -89,8 +90,12 @@ function Auth({ setAPI, user }) {
     }
 
     const handleCorrect = () => {
-        document.getElementById("main").classList.toggle("opacity-30")
-        document.getElementById("correct_message").classList.toggle("hidden")
+        // document.getElementById("main").classList.toggle("opacity-30")
+        // document.getElementById("correct_message").classList.toggle("hidden")
+        document.getElementById("drawCanvas").classList.add(
+          "shadow-canvas",
+          "shadow-green-400"
+        )
         document.getElementById("answerCover1").classList.add("hidden")
         // document.getElementById("answerCover2").classList.add("hidden")
         document.getElementById("svg-container").classList.add("blur-none") 
@@ -113,8 +118,11 @@ function Auth({ setAPI, user }) {
       //Move to next and set it
       kanjiQueue.current.dequeue()
       setKanji(kanjiQueue.current.peek())
+      document.getElementById("drawCanvas").classList.remove(
+        "shadow-canvas",
+        "shadow-green-800"
+      )
       document.getElementById("answerCover1").classList.remove("hidden")
-      // document.getElementById("answerCover2").classList.remove("hidden")
       document.getElementById("svg-container").classList.remove("blur-none")
       document.getElementById("svg-container").classList.add("hidden")
     }
@@ -267,7 +275,7 @@ function Auth({ setAPI, user }) {
               // }).meaning.toLowerCase(); // Set the primary meaning
               var id = radical.id
               var svgUrl = radical.data.character_images.find(function(image){ // Find the first SVG that does not have styling. Omit the '!' to get the ones with styling.
-                  return image.content_type == "image/svg+xml" && image.metadata.inline_styles;
+                  return image.content_type === "image/svg+xml" && image.metadata.inline_styles;
               });
               
               if(svgUrl){ // Not all radicals have an SVG
@@ -308,10 +316,10 @@ function Auth({ setAPI, user }) {
         <>
         <header class="w-full border-2 mx-auto block h-fit bg-white">
                 <div class=" w-11/12 mx-auto flex flex-col md:flex-row h-full justify-around ">
-                    <div class=" basis-1/2 content-center ml-5 text-left ">
-                        <img src="#" alt="Logo" class="inline-block align-middle w-28 xl:w-52 h-16 border-2 border-red-50"/>
+                    <div class=" basis-1/2 content-center ml-5 text-left font-serif ">
+                        {/* <img src="#" alt="Logo" class="inline-block align-middle w-28 xl:w-52 h-16 border-2 border-red-50"/> */}
                         <div className='md:ml-10 align-middle inline-block'>
-                        <h1 class="text-2xl md:text-3xl xl:text-5xl inline font-semibold">WkDraw</h1>
+                        <h1 class="text-3xl md:text-3xl xl:text-4xl inline font-normal italic">WkDraw</h1>
                         <br /><p>Kanji Drawing Practice Tool</p>
                         </div>
                     </div>
@@ -319,8 +327,8 @@ function Auth({ setAPI, user }) {
                     <div className="hidden md:flex flex-row-reverse xl:basis-1/2">
                         <div className=" flex flex-row items-center justify-end font-thin basis-2/4 text-center content-center ">
                             <div className='  align-middle'>
-                                <p className=' font-semibold text-xl'>{user.username}</p>
-                                <p className=' italic text-lg'>Level {user.level}</p>
+                                <span className=' font-semibold text-xl'>{user.username}</span>
+                                <span className=' italic text-lg block'>Level {user.level}</span>
                             </div>
                             <div className=' grow-0 content-center m-4 text-red-600 hover:text-red-800 rounded-full'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
@@ -334,9 +342,9 @@ function Auth({ setAPI, user }) {
                     {/* Small screen card! */}
                     <div className=' block md:hidden'>
                         <div className='  align-middle text-right' onClick={handleShowLogOut}>
-                            <p className=' text-xl font-semibold '>{user.username}</p>
-                            <p className=' italic text-lg '>Level {user.level}</p>
-                            <p className=' hidden text-red-600' id='responsive_log_out' onClick={handleLogOut}>Log out</p>
+                            <span className=' text-xl font-semibold '>{user.username}</span>
+                            <span className=' italic text-lg block '>Level {user.level}</span>
+                            <span className=' hidden text-red-600' id='responsive_log_out' onClick={handleLogOut}>Log out</span>
                         </div>
 
                     </div>
@@ -367,8 +375,8 @@ function Auth({ setAPI, user }) {
 
         {/* Correct Message */}
         <div id='correct_message' onClick={handleCorrect} className=' hidden absolute w-screen h-screen right-0 top-0 z-0 content-center'>
-            <div className='  w-11/12 md:w-96 mx-auto bg-white h-fit rounded-xl p-5 border-4 border-green-600'>
-                <p className=' mx-auto'>Correct!</p>
+            <div className=' fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-96 mx-auto bg-white h-fit rounded-xl p-5 border-4 border-green-600'>
+                <span className=' mx-auto'>Correct!</span>
                 {/* <button onClick={handleCorrect} className=' right-0 p-2 bg-black text-white rounded-lg'> Ok! </button> */}
             </div>
         </div>
@@ -380,7 +388,7 @@ function Auth({ setAPI, user }) {
                 e.preventDefault()
                 handleSorting("chooseLevel")
               }}>
-                <p className=' mb-5 lg:text-2xl'>Choose Level Range</p>
+                <span className=' mb-5 lg:text-2xl block'>Choose Level Range</span>
                 From: 
                 <select className=' inline-block mx-3 border-0 border-b-2 border-gray-500 py-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-500 ' onChange={(e) => levelRange.current[0] = e.target.value}>
                   {options.map((number) => (
@@ -397,7 +405,7 @@ function Auth({ setAPI, user }) {
                 ))}
                 </select>
                 <div className=' mt-5 w-full flex flex-row-reverse items-end mr-0 ml-auto'>
-                  <button type='submit' className='  px-3 py-1 mt-3 rounded-lg bg-gray-400 text-white'>Use Level Range</button>
+                  <button type='submit' className='  py-1 px-5 rounded-sm border-2 text-black font-thin'>Use Level Range</button>
                   {/* <label onClick={() => {
                     chooseLevelRange()
                   }} className=' text-red-500 hover:text-red-900 hover:cursor-pointer mx-5'>Cancel</label> */}
@@ -407,28 +415,8 @@ function Auth({ setAPI, user }) {
         </div>
 
         <hr className='my-5 shadow-xl hidden'></hr>
-
-        <footer className='h-fit mb-5 w-full'>
-        <div className='mx-auto h-full w-full xl:w-9/12 px-5 flex flex-col lg:flex-row text-sm flex-wrap'>
-            <p className=' basis-full flex-grow my-10'>WkDraw is a personal project, a simple aplication I thought would help me enormously while studying kanji with Wanikani! I hope anyone that reads this finds it helpful, please notify any bug or suggest imporvements to my email: santiagodelgado@gmail.com.</p>
-            <p className=' basis-1/3 xl:px-5'>
-            The &nbsp;
-            <a href='https://asdfjkl.github.io/kanjicanvas/' rel="noreferrer" target='_blank' className=' underline text-blue-800'>Kanji Canvas</a> recognition algorithm code was made by Dominik Klein and Seth Clydsedale, code can be found&nbsp;
-            <a href='https://github.com/asdfjkl/kanjicanvas' rel="noreferrer" target='_blank' className=' underline text-blue-800'>here.</a>
-            </p><br/>
-            <p className=' basis-1/3 xl:px-5'>
-            Kanji illustrations are provided by the&nbsp;
-            <a href='https://kanjivg.tagaini.net/' rel="noreferrer" target='_blank' className=' underline text-blue-800'>KanjiVG project</a> created by Ulrich Apel, accessible&nbsp;
-            <a href='https://github.com/KanjiVG/kanjivg' rel="noreferrer" target='_blank' className=' underline text-blue-800'>here.</a><br/><br/>
-            Kanji animations are possible thanks to theKanjiVGAnimate project, by NihongoDera. Check it out&nbsp;
-            <a href='https://github.com/nihongodera/kanjivganimate' rel="noreferrer" className=' underline text-blue-800' target='_blank'>here.</a>
-            </p><br/>
-            <p className=' basis-1/3 xl:px-5'>
-            Kanji meanings, readings, and example words in Guest mode are obtained from&nbsp;
-            <a href='https://kanjiapi.dev/' rel="noreferrer" className=' underline text-blue-800' target='_blank'>Kanjiapi.dev</a>, developed by Iridium Szreter.
-            </p>
-        </div>
-        </footer>
+        
+        <Footer />
         </>
         )
     );

@@ -11,7 +11,7 @@ function KanjiSetOptions ({ handleSorting, chooseLevelRange }) {
             if(element.id !== sort) element.classList.remove("underline", "font-semibold", "text-black")
             if(element.id !== sort) element.classList.add("text-gray-400")
         });
-        document.getElementById(sort).classList.add("underline", "font-semibold");    
+        document.getElementById(sort).classList.add("font-semibold");    
         document.getElementById(sort).classList.replace("text-gray-400", "text-black");
         if (sort === "chooseLevel"){
             chooseLevelRange()
@@ -35,7 +35,7 @@ function KanjiSetOptions ({ handleSorting, chooseLevelRange }) {
 
         <div className="  lg:block basis-full md:basis-5/12  w-full h-fit bg-[#f4f4f4] text-center mx-auto p-2 md:p-5 md:rounded-lg">
             <div className=" flex flex-row text-left md:mb-2 align-baseline">
-                <label className=" grow mx-2 text-lg font-normal xl:text-xl md:font-light content-center">Choose Kanji Set</label>
+                <span className=" grow mx-2 text-lg font-normal xl:text-xl md:font-light content-center">Choose Kanji Set</span>
                 <svg id="dropdown_down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
                     class="size-8  inline-block lg:hidden"
                     onClick={handleDropDown}>

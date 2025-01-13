@@ -34,10 +34,10 @@ function App() {
    * User's API Token will be stored in LocalStorage to keep session active until User willingly logs out. 
    */
   useEffect(() => {
-    console.log("During Mounting App.js!")
-    console.log("Current API: ", api)
-    console.log("Current Loading state: ", loading ? "Loading" : "Not loading")
-    console.log("Current user: ", user.current)
+    // console.log("During Mounting App.js!")
+    // console.log("Current API: ", api)
+    // console.log("Current Loading state: ", loading ? "Loading" : "Not loading")
+    // console.log("Current user: ", user.current)
 
     const verifyUser = async () => {
       //Request API User Endpoint

@@ -45,8 +45,8 @@ function Hints({ radicals, mnemonic }) {
     },)
 
     return (
-        <div className=" lg:block basis-full lg:basis-auto md:basis-6/12 w-full lg:h-fit bg-[#f4f4f4] text-left mx-auto md:mx-2 mt-5 md:mt-0 lg:mt-5 p-5 md:rounded-lg">
-            <label className=" block mb-2 font-normal md:font-light mx-2 text-lg xl:text-xl">Hints</label>
+        <div className=" lg:block basis-full  lg:basis-auto md:basis-6/12 w-full h-fit bg-[#f4f4f4] text-left mx-auto md:mx-2 mt-5 md:mt-0 lg:mt-5 p-5 md:rounded-lg">
+            <span className=" block mb-2 font-normal md:font-light mx-2 text-lg xl:text-xl">Hints</span>
             <div className=" bg-white rounded-lg p-5">
                 {/* Radicals */}
                 <div className="  items-center rounded-lg py-2 text-center">
@@ -57,19 +57,19 @@ function Hints({ radicals, mnemonic }) {
                     ))
                     }
                     </div>
-                    <div id="radicalsCover" onClick={handleShowRadicals} className="  bg-black h-14 items-center text-white text-xl content-center font-thin italic">
+                    <div id="radicalsCover" onClick={handleShowRadicals} className="  bg-black rounded-2xl h-14 items-center text-white text-xl content-center font-thin italic">
                         Radicals ({radicals.length})
                     </div>
                 </div>
                 {/* Mnemonics */}
                 <div className=" relative items-center  rounded-lg py-2 text-center">
-                    <div onClick={handleShowMnemonics} id="mnemonicCover" className=" w-full h-14 content-center bg-black text-xl italic font-thin text-white">
+                    <div onClick={handleShowMnemonics} id="mnemonicCover" className=" w-full h-14 content-center bg-black rounded-2xl text-xl italic font-thin text-white">
                         Meaning Mnemonic
                     </div>
-                    <div id="mnemonic"
+                    <p id="mnemonic"
                     className="hidden"
                     dangerouslySetInnerHTML={{ __html: mnemonic }}
-                    ></div>
+                    ></p>
                 </div>
             </div>
         </div>
