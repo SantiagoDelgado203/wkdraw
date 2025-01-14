@@ -225,6 +225,7 @@ function Auth({ setAPI, user }) {
               kanjiDictionary.current.get(entry.id).document_url = entry.data.document_url;
               kanjiDictionary.current.get(entry.id).AuxMeanings = entry.data.auxiliary_meanings;
               kanjiDictionary.current.get(entry.id).MeaningMnemonic = entry.data.meaning_mnemonic;
+              kanjiDictionary.current.get(entry.id).Unicode = entry.data.characters.codePointAt(0).toString(16).toUpperCase().padStart(5, "0");
             })
   
             next = responseBody.pages.next_url;
@@ -359,7 +360,7 @@ function Auth({ setAPI, user }) {
         </div><br/><br/><br/>
         
         {/* Central Column - Kanji Canvas & Predictions */}
-        <div class="  basis-1/3 text-center mx-auto">
+        <div class=" basis-1/3 text-center mx-auto">
           <AuthContext.Provider value={true}>
               <Canvas answerKanji={kanji} handleCorrect={handleCorrect} nextKanji={nextKanji} />
           </AuthContext.Provider>
@@ -367,7 +368,7 @@ function Auth({ setAPI, user }) {
 
         {/* Right Column - SVG & Hints */}
         <div class=" flex flex-col md:flex-row lg:flex-col  md:justify-evenly basis-1/3 md:px-5 xl:px-16">
-          <AnswerSVG unicode={kanji.KanjiCharacter.codePointAt(0).toString(16).toUpperCase().padStart(5, "0")} />
+          <AnswerSVG unicode={kanji.Unicode} />
           <Hints radicals={kanji.RadicalsIDs.map((id) => radicals.current[id])} mnemonic={kanji.MeaningMnemonic} />
         </div>
         <br/>

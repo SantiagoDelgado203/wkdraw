@@ -18,7 +18,7 @@ function SVG({ unicode, setLoading }) {
                 svgElement.classList.add("kanjiVG");
                 //Set the state to render
                 setSvgContent(svgElement.outerHTML);
-                setLoading((l) => l = false)
+                setLoading((l) => l = false);
             } catch (error) {
                 console.error('Error fetching SVG:', error);
             }
