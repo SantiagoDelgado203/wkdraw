@@ -8,17 +8,26 @@ function AnswerSVG ({ unicode }) {
   useEffect(() => {
     async function fetchSvg(){
       try {
+        const baseUrl = process.env.PUBLIC_URL || '';
+        const url = `${baseUrl}/kanji/${unicode}.svg`;
+
+        console.log("Fetching SVG from:", url);
         // Fetch the SVG file from the public/kanji folder
-        const response = await fetch(`${process.env.PUBLIC_URL}/kanji/${unicode}.svg`);
+        const response = await fetch(url);
         if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`Error loading SVG: ${response.status} - ${response.statusText}`, errorText);
           throw new Error(`Failed to load SVG for ${unicode}`);
         }
+    
         const svgText = await response.text();
-        console.log(svgText)
+        console.log("SVG content loaded:", svgText);
+    
         const parser = new DOMParser();
         const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
         const svgElement = svgDoc.documentElement;
         svgElement.classList.add("kanjiVG");
+    
         setSvgContent(svgElement.outerHTML);
         setLoading((l) => l = false)
         if(document.getElementById("svg-container")){
