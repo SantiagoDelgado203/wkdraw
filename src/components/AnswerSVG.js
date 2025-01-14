@@ -11,7 +11,7 @@ function AnswerSVG ({ unicode }) {
         const baseUrl = process.env.PUBLIC_URL || '';
         const url = `${baseUrl}/kanji/${unicode}.svg`;
 
-        console.log("Fetching SVG from:", url);
+        // console.log("Fetching SVG from:", url);
         // Fetch the SVG file from the public/kanji folder
         const response = await fetch(url);
         if (!response.ok) {
@@ -21,7 +21,7 @@ function AnswerSVG ({ unicode }) {
         }
     
         const svgText = await response.text();
-        console.log("SVG content loaded:", svgText);
+        // console.log("SVG content loaded:", svgText);
     
         const parser = new DOMParser();
         const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');

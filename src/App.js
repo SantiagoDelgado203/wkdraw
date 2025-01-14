@@ -54,7 +54,7 @@ function App() {
           throw new Error(
             "Inactive account. You need an active Wanikani account to use this."
           );
-        console.log("User verified!")
+        // console.log("User verified!")
         localStorage.setItem("wk_api", api);
         user.current = responseBody.data
         formError.current = "";

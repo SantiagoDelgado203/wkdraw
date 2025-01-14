@@ -160,4 +160,4 @@ var KVGAnimator = (function () {
     return KVGAnimator;
 })();
 
-module.exports = KanjivgAnimate;
+// module.exports = KanjivgAnimate;

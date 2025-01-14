@@ -312,7 +312,8 @@ function Auth({ setAPI, user }) {
 
     return (
         loading ? (
-            <>{console.log("Loading Auth...")}</>
+            // <>{console.log("Loading Auth...")}</>
+            null
         ) : (
         <>
         <header class="w-full border-2 mx-auto block h-fit bg-white">

@@ -16,9 +16,9 @@ function Guest({ setAPI, formError, setLoading }) {
 
   useEffect(() => {
     localStorage.removeItem("predictions")
-    console.log("During Mounting Guest.js!")
-    console.log("Current API: ", localStorage.getItem("api"))
-    console.log("Current user: ", localStorage.getItem("user"))
+    // console.log("During Mounting Guest.js!")
+    // console.log("Current API: ", localStorage.getItem("api"))
+    // console.log("Current user: ", localStorage.getItem("user"))
   }, [])
 
   return (

@@ -53,7 +53,7 @@ function Hints({ radicals, mnemonic }) {
                     <div id="radicals" className=" hidden text-center w-full">
                     {
                     Object.entries(radicals).map(([key, url]) => (
-                        <img className=" size-14 inline-block mx-2 rounded-lg border-2 p-2" src={url} alt={key} />
+                        <img className=" size-14 inline-block mx-2 rounded-lg border-2 p-2" src={url} alt={key} key={key} />
                     ))
                     }
                     </div>
