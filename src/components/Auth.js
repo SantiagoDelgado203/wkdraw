@@ -225,7 +225,7 @@ function Auth({ setAPI, user }) {
               kanjiDictionary.current.get(entry.id).document_url = entry.data.document_url;
               kanjiDictionary.current.get(entry.id).AuxMeanings = entry.data.auxiliary_meanings;
               kanjiDictionary.current.get(entry.id).MeaningMnemonic = entry.data.meaning_mnemonic;
-              kanjiDictionary.current.get(entry.id).Unicode = entry.data.characters.codePointAt(0).toString(16).toUpperCase().padStart(5, "0");
+              kanjiDictionary.current.get(entry.id).Unicode = entry.data.characters.codePointAt(0).toString(16).toLowerCase().padStart(5, "0");
             })
   
             next = responseBody.pages.next_url;
