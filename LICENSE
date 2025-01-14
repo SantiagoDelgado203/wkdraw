@@ -1,22 +1,18 @@
-# LICENSE
+LICENSE
 
-## WkDraw License
-
+WkDraw License
 This project, WkDraw, is licensed under the Creative Commons Attribution-Share Alike 3.0 License (CC BY-SA 3.0) to ensure compliance with third-party assets used in the project, such as KanjiVG illustrations. You are free to:
+Share: Copy and redistribute the material in any medium or format.
+Adapt: Remix, transform, and build upon the material for any purpose, even commercially.
 
-- **Share**: Copy and redistribute the material in any medium or format.
-- **Adapt**: Remix, transform, and build upon the material for any purpose, even commercially.
-
-### **Attribution**
+Attribution:
 You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
-### **ShareAlike**
+ShareAlike:
 If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
-
 For components of the project authored by others:
-- **KanjiVG**: Copyright © 2009 – 2024 by Ulrich Apel, licensed under CC BY-SA 3.0. [More info](http://kanjivg.tagaini.net/).
-- **KanjiVGAnimate**: Copyright © NihongoDera. Licensed under the MIT License. [More info](https://github.com/NihongoDera/KanjiVGAnimate).
-- **Kanji Canvas Recognition Algorithm**: Created by Dominik Klein and Seth Clydsedale. Used under its respective license.
-- **Application Icon**: Chinese icons created by Smashicons from Flaticon. Used with attribution according to Flaticon’s terms.
+KanjiVG: Copyright © 2009 – 2024 by Ulrich Apel, licensed under CC BY-SA 3.0. More info.
+KanjiVGAnimate: Copyright © NihongoDera. Licensed under the MIT License. More info.
+Kanji Canvas Recognition Algorithm: Created by Dominik Klein and Seth Clydsedale. Used under its respective license.
+Application Icon: Chinese icons created by Smashicons from Flaticon. Used with attribution according to Flaticon’s terms.
 
----
